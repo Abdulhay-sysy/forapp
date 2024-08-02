@@ -1,0 +1,71 @@
+<CustomButton@Button>:
+    font_size: '18sp'
+    size_hint_y: None
+    height: '50dp'
+    background_normal: ''
+    background_down: ''
+    canvas.before:
+        Color:
+            rgba: 0.2, 0.6, 0.8, 1 if self.state == 'normal' else 0.2, 0.8, 0.6, 1
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [10,]
+
+<CustomTextInput@TextInput>:
+    font_size: '20sp'
+    size_hint_y: None
+    height: '40dp'
+    background_normal: ''
+    background_active: ''
+    foreground_color: 0, 0, 0, 1  # Black text color
+    cursor_color: 0, 0, 0, 1  # Black cursor color
+    padding: [10, 10, 10, 10]
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1  # White background color
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [10,]
+
+BoxLayout:
+    orientation: 'vertical'
+    padding: [20, 40, 20, 40]
+    spacing: 20
+
+    canvas.before:
+        Color:
+            rgba: 0.1, 0.1, 0.1, 1  # Dark background
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    Label:
+        id: timer_label
+        text: 'Timer App'
+        font_size: '40sp'
+        color: 0.8, 0.9, 1, 1  # Light blue color
+        bold: True
+
+    CustomTextInput:
+        id: time_input
+        hint_text: 'Enter interval in HHMM (e.g., 0330)'
+        input_filter: 'int'
+        multiline: False
+
+    CustomButton:
+        text: 'Start Timer'
+        on_press: app.start_timer()
+        color: 0.2, 0.9, 0.2, 1  # Light green color for button text
+
+    CustomButton:
+        text: 'Stop Timer'
+        on_press: app.stop_timer()
+        color: 1, 0.2, 0.2, 1  # Light red color for button text
+
+    Label:
+        id: remaining_label
+        text: 'Time remaining: N/A'
+        font_size: '20sp'
+        color: 1, 1, 0.5, 1  # Light yellow color
